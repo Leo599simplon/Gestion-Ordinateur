@@ -34,8 +34,8 @@ CREATE TABLE Ordinateurs (
 
 CREATE TABLE Sessions (
     id_session INT AUTO_INCREMENT NOT NULL,
-    date_debut DATE NOT NULL,
-    date_fin DATE NOT NULL,
+    date_debut DATETIME NOT NULL,
+    date_fin DATETIME NOT NULL,
     id_ordinateur INT NOT NULL,
     id_visiteur INT NOT NULL,
     PRIMARY KEY (id_session)
