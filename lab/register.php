@@ -3,35 +3,35 @@
 require_once "config.php";
 
 // definition des variables 
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$email = $password = $confirm_password = "";
+$email_err = $password_err = $confirm_password_err = "";
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // validation du nom du joueur
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter a username.";
+    if (empty(trim($_POST["email"]))) {
+        $email_err = "Merci de bien rentrer votre email.";
     } else {
         // preparation de la requete SQL SELECT 
-        $sql = "SELECT id FROM users WHERE username = :username";
+        $sql = "SELECT id FROM Administrateur WHERE email = :email";
 
         if ($stmt = $pdo->prepare($sql)) {
             // lier les variables en paramètres à la requête
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
 
             // paramètres
-            $param_username = trim($_POST["username"]);
+            $param_email = trim($_POST["email"]);
 
             // execution de la requête
             if ($stmt->execute()) {
                 if ($stmt->rowCount() == 1) {
-                    $username_err = "This username is already taken.";
+                    $email_err = "email déjà utilisé";
                 } else {
-                    $username = trim($_POST["username"]);
+                    $email = trim($_POST["email"]);
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo "une erreur est survenue";
             }
 
             // fermeture de la requête
@@ -41,36 +41,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validation mot de passe
     if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
+        $password_err = "Merci de rentrer votre mot de passe.";
     } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have atleast 6 characters.";
+        $password_err = "Votre mot de passe doit contenir au moins 6 caractères.";
     } else {
         $password = trim($_POST["password"]);
     }
 
     // Validation confirmation mot de passe
     if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password.";
+        $confirm_password_err = "Merci de confirmer votre mot de passe.";
     } else {
         $confirm_password = trim($_POST["confirm_password"]);
         if (empty($password_err) && ($password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
+            $confirm_password_err = "Les mots de passe ne correspondent pas";
         }
     }
 
     // Verifier si pas d'erreur avant ajout dans bdd
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
+    if (empty($email_err) && empty($password_err) && empty($confirm_password_err)) {
 
         // requête SQL INSERT
-        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+        $sql = "INSERT INTO Administrateur (email, password) VALUES (:email, :password)";
 
         if ($stmt = $pdo->prepare($sql)) {
             // lier les variables en paramètre aux 2 requêtes
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
+            $stmt->bindParam(":email", $param_email, PDO::PARAM_STR);
             $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
 
             // paramètres
-            $param_username = $username;
+            $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // crypter le mot de passe
 
             // execution de la requête
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // redirection à la page de login
                 header("location: login.php");
             } else {
-                echo "Something went wrong. Please try again later.";
+                echo "erreur";
             }
 
             // fermer la déclaration
@@ -106,10 +106,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h2>Inscription</h2>
         <p>Merci de bien vouloir remplir ces champs</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-            <div class="form-group mb-3 <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+            <div class="form-group mb-3 <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
                 <label class="form-label">Nom</label>
-                <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                <span class="help-block"><?php echo $username_err; ?></span>
+                <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="help-block"><?php echo $email_err; ?></span>
             </div>
             <div class="form-group mb-3<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label class="form-label">Mot de passe</label>

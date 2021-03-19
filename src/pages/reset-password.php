@@ -4,12 +4,12 @@ session_start();
  
 
 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+    header('Location: pages/welcome.php');
     exit;
 }
  
 
-require_once "config.php";
+require_once "../include/config.php";
 
 
 $new_password = $confirm_password = "";
@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // verifier si pas d'erreurs
     if(empty($new_password_err) && empty($confirm_password_err)){
         // preparation de la requête
-        $sql = "UPDATE users SET password = :password WHERE id = :id";
+        $sql = "UPDATE Administrateur SET password = :password WHERE id = :id";
         
         if($stmt = $pdo->prepare($sql)){
             // paramètres attachés tout ça tout ça
