@@ -8,8 +8,8 @@ if ($_SERVER["REMOTE_ADDR"] == "127.0.0.1") { // Si on est en local on utilise c
 } else { // Sinon on utilise les identifiants de la BDD Heroku
     $serveur = "us-cdbr-east-03.cleardb.com";
     $dbname = "b86ba72a9788a4";
-    $user = "13a4dfbb";
-    $password = "heroku_99c077ce9940398";
+    $user = "heroku_99c077ce9940398";
+    $password = "13a4dfbb";
 }
 
 try { // Connexion à la BDD
