@@ -8,49 +8,49 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-require_once "src/include/config.php";
-include "src/include/add.php";
-include "src/include/ajoutSession.php";
+// require_once "src/include/config.php";
+// include "src/include/add.php";
+// include "src/include/ajoutSession.php";
 
 
 
 
 
-// On écrit notre requête
-$sql = 'SELECT * FROM `Visiteurs`';
+// // On écrit notre requête
+// $sql = 'SELECT * FROM `Visiteurs`';
 
-// On prépare la requête
-$query = $pdo->prepare($sql);
+// // On prépare la requête
+// $query = $pdo->prepare($sql);
 
-// On exécute la requête
-$query->execute();
+// // On exécute la requête
+// $query->execute();
 
-// On stocke le résultat dans un tableau associatif
-$result = $query->fetchAll(PDO::FETCH_ASSOC);
-
-
-
-// Même chose pour les ordinateurs
-$sqlComp = 'SELECT * FROM `Ordinateurs`';
-
-$queryComp = $pdo->prepare($sqlComp);
+// // On stocke le résultat dans un tableau associatif
+// $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 
-$queryComp->execute();
 
-$resultComp = $queryComp->fetchAll(PDO::FETCH_ASSOC);
+// // Même chose pour les ordinateurs
+// $sqlComp = 'SELECT * FROM `Ordinateurs`';
 
-
-// Voir les sessions actives
-$sqlSession = 'SELECT * FROM `Sessions`';
-// $sqlSession = 'SELECT o.nom, v.nom, s.date_debut, s.date_fin FROM Ordinateurs o, Visiteurs v, Sessions s';
-
-$querySession  = $pdo->prepare($sqlSession );
+// $queryComp = $pdo->prepare($sqlComp);
 
 
-$querySession ->execute();
+// $queryComp->execute();
 
-$resultSession  = $querySession ->fetchAll(PDO::FETCH_ASSOC);
+// $resultComp = $queryComp->fetchAll(PDO::FETCH_ASSOC);
+
+
+// // Voir les sessions actives
+// $sqlSession = 'SELECT * FROM `Sessions`';
+// // $sqlSession = 'SELECT o.nom, v.nom, s.date_debut, s.date_fin FROM Ordinateurs o, Visiteurs v, Sessions s';
+
+// $querySession  = $pdo->prepare($sqlSession );
+
+
+// $querySession ->execute();
+
+// $resultSession  = $querySession ->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
