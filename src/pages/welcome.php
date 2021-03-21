@@ -8,9 +8,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-require_once "../include/config.php";
-include "../include/add.php";
-include "../include/ajoutSession.php";
+require_once "src/include/config.php";
+include "src/include/add.php";
+include "src/include/ajoutSession.php";
 
 
 
