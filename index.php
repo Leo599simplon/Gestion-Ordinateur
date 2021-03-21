@@ -9,7 +9,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 }
  
 // inclure bdd
-require_once "src/include/config.php";
+
  
 // variables définies en mode chaine de caractères vide
 $email = $password = "";

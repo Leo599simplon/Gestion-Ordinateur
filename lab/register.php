@@ -1,6 +1,6 @@
 <?php
 
-require_once "config.php";
+require_once "src/include/config.php";
 
 // definition des variables 
 $email = $password = $confirm_password = "";
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // execution de la requête
             if ($stmt->execute()) {
                 // redirection à la page de login
-                header("location: login.php");
+                header("location: index.php");
             } else {
                 echo "erreur";
             }
