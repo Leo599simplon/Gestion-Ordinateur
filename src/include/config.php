@@ -1,19 +1,19 @@
 <?php
 
-// if ($_SERVER["REMOTE_ADDR"] == "127.0.0.1") { // Si on est en local on utilise ces identifiants
-//     $serveur = "localhost";
-//     $dbname = "test";
-//     $user = "admin";
-//     $password = "test";
-// } else { // Sinon on utilise les identifiants de la BDD Heroku
-//     $serveur = "us-cdbr-east-03.cleardb.com";
-//     $dbname = "heroku_99c077ce9940398";
-//     $user = "b86ba72a9788a4";
-//     $password = "13a4dfbb";
-// }
+if ($_SERVER["REMOTE_ADDR"] == "127.0.0.1") { // Si on est en local on utilise ces identifiants
+    $serveur = "localhost";
+    $dbname = "test";
+    $user = "admin";
+    $password = "test";
+} else { // Sinon on utilise les identifiants de la BDD Heroku
+    $serveur = "us-cdbr-east-03.cleardb.com";
+    $dbname = "heroku_99c077ce9940398";
+    $user = "b86ba72a9788a4";
+    $password = "13a4dfbb";
+}
 
 try { // Connexion à la BDD
-    $pdo = new PDO("mysql:host=us-cdbr-east-03.cleardb.com;dbname=heroku_99c077ce9940398", "b86ba72a9788a4", "13a4dfbb");
+    $pdo = new PDO("mysql:host=$serveur;dbname=$dbname", $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     error_log(date('l jS \of F Y h:i:s A') . ": Connexion à la base de données réussie\r\n", 3, '../var/log.txt');
 } catch (Exception $e) { // Si erreur, on renvoi un message d'erreur
