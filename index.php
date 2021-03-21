@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $email_err = "Pas de compte avec cet utilisateur";
                 }
             } else{
-                // error_log(date('l jS \of F Y h:i:s A') . ": erreur lors de la connexion\r\n", 3, 'log.txt');
+                error_log(date('l jS \of F Y h:i:s A') . ": erreur lors de la connexion\r\n", 3, 'log.txt');
             }
 
             // fermeture requête

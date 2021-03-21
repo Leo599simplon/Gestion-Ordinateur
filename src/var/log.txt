@@ -1,1 +1,2 @@
 Friday 19th of March 2021 07:41:06 AM: execution query ok
+Sunday 21st of March 2021 05:19:20 PM: Connexion à la base de données réussie
