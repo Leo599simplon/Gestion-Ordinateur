@@ -4,7 +4,7 @@ session_start();
  
 // verifier si l'utilisateur est déjà log
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: src/pages/welcome.php");
+    header('location: src/pages/welcome.php');
     exit;
 }
  
@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["email"] = $email;                            
                             
                             // Redirect user to welcome page
-                            header("location: src/pages/welcome.php");
+                            header('Location: src/pages/welcome.php');
                         } else{
                             // Display an error message if password is not valid
                             $password_err = "Mot de passe invalide";
@@ -73,7 +73,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     $email_err = "Pas de compte avec cet utilisateur";
                 }
             } else{
-                echo "erreur Canette";
+                error_log(date('l jS \of F Y h:i:s A') . ": erreur lors de la connexion\r\n", 3, 'log.txt');
             }
 
             // fermeture requête
